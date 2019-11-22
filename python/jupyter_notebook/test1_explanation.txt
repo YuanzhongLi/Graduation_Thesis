@@ -1,11 +1,11 @@
-npoin  nele  nsec  npfix  nlod                   # Basic values for analysis
-E  po  A  Ix  gamma
-    ..... (1 to nsec) .....                      # Material properties
-node_1  node_2  isec                             # Element connectivity, material set number
-    ..... (1 to nele) .....                      #
-x  y  z                                          # Node coordinate, temperature change of node
-    ..... (1 to npoin) .....                     #
-lp  kox  koy  koz  kmx  kmy  kmz  rdis_x  rdis_y  rdis_z  rrot_x  rrot_y  rrot_z
-    ..... (1 to npfix) .....                     # Restricted node and restrict conditions
-lp  fp_x  fp_y  fp_z                             # Loaded node and loading conditions
-    ..... (1 to nlod) .....                      #     (omit data input if nlod=0)
+npoin  nele  npfix  nlod                         # 節点数，要素数，拘束節点数，載荷節点数
+E  Ix  　　　                              　　　　# 要素弾性係数，断面二次モーメント
+    ..... (1 to nele) .....                     
+node_1  node_2  iele                             # 節点１，節点２，要素番号
+    ..... (1 to nele) .....                      
+x  z                                             # 節点x座標，節点z座標
+    ..... (1 to npoin) .....                     
+lp  ko  km  r_dis  r_rot                         # 拘束節点番号, 方向変位拘束の有無（拘束: 1，自由: 0）, 軸周り回転拘束の有無（拘束: 1，自由: 0）, 方向既知変位（無拘束でも0を入力）, 軸周り既知回転量（無拘束でも0を入力）
+    ..... (1 to npfix) .....                     
+lp  fp  mp                                       # 載荷重節点番号，荷重, 軸周りモーメント
+    ..... (1 to nlod) .....                      

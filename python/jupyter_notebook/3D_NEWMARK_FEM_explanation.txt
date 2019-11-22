@@ -1,0 +1,26 @@
+# 節点数，要素数，拘束節点数，載荷節点数, 微小時間(Δt), 微小時間数(Δtの数)
+
+npoin  nele  npfix  nlod  delta_t  n_t
+
+# 要素弾性係数，要素ポアソン比, 要素断面積, 断面二次モーメント(x, y, z), 要素密度(kg/m^3), x/y/z方向加速度(gの比)
+E  Po  A  Ix  Iy  Iz  m  gkx  gky  gkz  　　　    
+    ..... (1 to nele) .....                     
+
+# 節点１，節点２，要素番号
+node_1  node_2  iele                             
+    ..... (1 to nele) ..... 
+    
+# 節点x座標，節点y座標, 節点z座標
+x  y  z                                             
+    ..... (1 to npoin) .....   
+    
+# n_t + 1 分だけある
+# 拘束節点番号, x/y/z方向変位拘束の有無（拘束: 1，自由: 0）, x/y/z軸周り回転拘束の有無（拘束: 1，自由: 0）, x/y/z方向既知変位（無拘束でも0を入力）, x/y/z軸周り既知回転量（無拘束でも0を入力）
+lp  kox  koy  koz  kmx  kmy  kmz  r_disx  r_disy  r_disz  r_rotx  r_roty  r_rotz           
+    ..... (1 to npfix) .....
+    
+# 載荷重節点番号，x/y/z方向荷重, x/y/z軸周りモーメント
+lp  fp_x fp_y fp_z  mp_x  mp_y  mp_z
+    ..... (1 to nlod) .....      
+    
+    .....(1 to nunit) .....
