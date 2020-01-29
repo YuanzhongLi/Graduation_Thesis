@@ -131,13 +131,9 @@ def inputdata(fnameR, nod, nfree):  #データパス, 要素節点数, 自由度
     return npoin, nele, npfix, nlod, delta_t, n_t, ae, node, x, mpfix, rdis, fp
 
 
-npoin,nele,npfix,nlod,delta_t,n_t,ae,node,x,mpfix,rdis,fp=inputdata('test_verification1.txt',2, 6)
-
-a = np.array([[1,2], [3, 4]])
-b = np.array([1, 3])
-c = np.dot(a, b)
-c
-
+# +
+# npoin,nele,npfix,nlod,delta_t,n_t,ae,node,x,mpfix,rdis,fp=inputdata('test_verification1.txt',2, 6)
+# -
 
 # 要素剛性マトリックス作成（local）
 def sm_3dfrm(EA,GJ,EIy,EIz,x1,y1,z1,x2,y2,z2):
@@ -274,8 +270,8 @@ def main_3d_NEWMARK_FEM():
             # 検証用
 #             gk_eig_val, gk_eig_vec = np.linalg.eig(gk)
 #             return sorted(gk_eig_val)
-            eig_val, eig_vec = scipy.linalg.eig(gk, mass_mat)
-            return sorted(eig_val)
+#             eig_val, eig_vec = scipy.linalg.eig(gk, mass_mat)
+#             return sorted(eig_val)
             
             c_mat=dumping_3dfrm(gamma, omega, mass_mat, gk)
             
@@ -287,7 +283,7 @@ def main_3d_NEWMARK_FEM():
             
             tmp_for_c = (alpha/beta/delta_t)            * dis[step-1] \
                       + ((alpha/beta)-1.0)              * vec[step-1] \
-                      + delta_t * ((alpha/beta)-1.0)  * acc[step-1]                       
+                      + delta_t * ((alpha/2/beta)-1.0)  * acc[step-1]                       
             
             fp[step] = fp[step] + np.dot(mass_mat, tmp_for_mass) + np.dot(c_mat, tmp_for_c)            
             
@@ -332,9 +328,7 @@ def main_3d_NEWMARK_FEM():
 
 # -
 
-gk_eig_val = main_3d_NEWMARK_FEM()
-
-np.sqrt(6989.57)
+dis, vec, acc = main_3d_NEWMARK_FEM()
 
 check = np.empty((1000), dtype=np.float64)
 for i in range(0, 1000):
@@ -343,7 +337,7 @@ for i in range(0, 1000):
 fig = plt.figure(figsize=(12, 8))
 ax = fig.add_subplot(111)
 ax.plot(check, label='newmark_verif', color=(0, 0, 1))
-plt.savefig('newmark_verif.png')
+# plt.savefig('newmark_verif.png')
 plt.show()
 
 plt.plot(static_verif_z, label='static verif')

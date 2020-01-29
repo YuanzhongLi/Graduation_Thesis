@@ -18,6 +18,7 @@ jupyter-highlight-selected-word = "*"
 jupyterthemes = "*"
 yapf = "*"
 scipy = "*"
+pyquaternion = "*"
 
 [requires]
 python_version = "3.7"
